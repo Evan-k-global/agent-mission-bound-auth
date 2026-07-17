@@ -218,9 +218,27 @@ The repeatable build and review playbook is packaged as a local Codex skill:
 
 ## License
 
-Business Source License 1.1 with a commercial production use path. See
-[LICENSE](./LICENSE) and [COMMERCIAL.md](./COMMERCIAL.md).
+Agent Mission-Bound Auth is part of the Zeko Agent Bundle. Protected
+product/protocol-layer code is licensed under BUSL-1.1 with the Zeko Additional
+Use Grant. Adoption-layer materials may be Apache-2.0 or MIT where expressly
+marked.
 
-The Change License is Apache-2.0 on the Change Date stated in
-[LICENSE](./LICENSE); the Apache-2.0 text is preserved in
-[LICENSE-APACHE-2.0](./LICENSE-APACHE-2.0).
+The current Change Date is 2030-07-17, and the Change License is Apache
+License, Version 2.0. Non-production/testnet use is free under the Additional
+Use Grant. Production Agent Bundle deployments require the self-serve
+commercial deployment license unless an Additional Free Use applies.
+
+Standard self-serve pricing is published in [PRICING.md](./PRICING.md):
+
+- Protocol Layer Production Deployments: $1,000/year per production rollup for
+  1-10 production rollups; 11+ production rollups use custom pricing.
+- Agent Bundle Production Deployments: $1,000/year per deploying legal entity
+  per Deployment Network.
+
+The self-serve commercial deployment license covers license rights only.
+Managed deployment, enterprise support, compliance review, SLAs, custom
+integrations, and dedicated infrastructure are separate commercial services.
+
+See [LICENSING.md](./LICENSING.md), [LICENSE](./LICENSE),
+[LICENSES/ZEKO-ADDITIONAL-USE-GRANT.md](./LICENSES/ZEKO-ADDITIONAL-USE-GRANT.md),
+[COMMERCIAL-TERMS.md](./COMMERCIAL-TERMS.md), and [PRICING.md](./PRICING.md).
