@@ -4,7 +4,7 @@ import { isProductionProfile, isProductionStrictVerifier } from "./runtime.js";
 
 export const DIGEST_HOLDER_PROOF_SCHEME = "digest-holder-proof-v1";
 export const ED25519_HOLDER_PROOF_SCHEME = "ed25519-holder-proof-v1";
-export const MAGIC_CITY_ED25519_COMPAT_HOLDER_PROOF_SCHEME = "magic-city-ed25519-pop-v1";
+export const BROWSER_HELPER_ED25519_COMPAT_HOLDER_PROOF_SCHEME = "browser-helper-ed25519-pop-v1";
 
 export function holderChallengeHash(eventBody) {
   return sha256Hex({
@@ -222,7 +222,7 @@ export function verifyHolderProof(event, options = {}) {
   if (holderProof.scheme === ED25519_HOLDER_PROOF_SCHEME) {
     return verifyEd25519HolderProof(event, holderProof);
   }
-  if (holderProof.scheme === MAGIC_CITY_ED25519_COMPAT_HOLDER_PROOF_SCHEME) {
+  if (holderProof.scheme === BROWSER_HELPER_ED25519_COMPAT_HOLDER_PROOF_SCHEME) {
     return verifyCompatibilityHolderProof(event, holderProof, options);
   }
   if (!holderProof.scheme || holderProof.scheme === DIGEST_HOLDER_PROOF_SCHEME) {

@@ -15,8 +15,8 @@ import {
   buildRedactedTraceExport,
   buildRegistryAnchorFromReceipt,
   buildSettlementTransition,
+  BROWSER_HELPER_ED25519_COMPAT_HOLDER_PROOF_SCHEME,
   ED25519_HOLDER_PROOF_SCHEME,
-  MAGIC_CITY_ED25519_COMPAT_HOLDER_PROOF_SCHEME,
   renewMissionCapability,
   id,
   sha256Hex,
@@ -94,7 +94,7 @@ async function remoteSmoke(baseUrl) {
 
 function signCompatProof({ event, privateKey, publicJwk, appChallengeHash }) {
   return {
-    scheme: MAGIC_CITY_ED25519_COMPAT_HOLDER_PROOF_SCHEME,
+    scheme: BROWSER_HELPER_ED25519_COMPAT_HOLDER_PROOF_SCHEME,
     keyThumbprint: sha256Hex(publicJwk),
     publicJwk,
     messageHash: event.holderProof.messageHash,
@@ -103,7 +103,7 @@ function signCompatProof({ event, privateKey, publicJwk, appChallengeHash }) {
   };
 }
 
-const missionId = "magic-city-browser-mission-001";
+const missionId = "browser-helper-mission-001";
 const missionIdHash = sha256Hex(missionId);
 const keys = generateKeyPairSync("ed25519");
 const publicJwk = keys.publicKey.export({ format: "jwk" });
@@ -129,10 +129,10 @@ const policy = buildMissionPolicy({
 });
 
 const capability = buildMissionCapability({
-  issuer: "magic-city-conformance",
+  issuer: "browser-helper-conformance",
   audience: "browser-helper",
-  principal: "org:magic-city",
-  agentId: "agent-magic-city-001",
+  principal: "org:example",
+  agentId: "agent-browser-helper-001",
   runtimeId: "browser-helper-001",
   holderPublicKey: publicJwk,
   missionId,
@@ -142,7 +142,7 @@ const capability = buildMissionCapability({
   paymentRails: policy.paymentRails,
   maxSpendUsd: policy.maxSpendUsd,
   expiresAt,
-  nullifierSeed: "magic-city-nullifier-seed"
+  nullifierSeed: "browser-helper-nullifier-seed"
 });
 
 const { capability: renewedCapability, renewal } = renewMissionCapability(capability, {
@@ -160,7 +160,7 @@ const profile = buildBrowserMissionProfile({
   policyHash: policy.policyHash,
   runnerType: "extension-helper",
   runtimeId: "browser-helper-001",
-  extensionId: "magic-city-local-extension",
+  extensionId: "browser-helper-local-extension",
   holderKeyCommitment,
   sessionId: "session-123",
   tabId: "tab-abc",
@@ -228,7 +228,7 @@ compatEvent.holderProof = signCompatProof({
   event: compatEvent,
   privateKey: keys.privateKey,
   publicJwk,
-  appChallengeHash: sha256Hex({ app: "magic-city", challenge: "browser-proof-of-possession" })
+  appChallengeHash: sha256Hex({ app: "browser-helper", challenge: "browser-proof-of-possession" })
 });
 const compatEventEnvelope = recomputeEventEnvelope(compatEvent);
 const compatAccepted = verifyBoundaryEvent(compatEventEnvelope, { verifierMode: "compatibility" });
@@ -325,8 +325,8 @@ const anchorResult = buildRegistryAnchorFromReceipt({
   proofArtifact: { proofSystem: "signed-commitment-transition", statementHash },
   relayerResponse: {
     networkId: "zeko:testnet",
-    zkappAddress: "B62qmagiccityregistry",
-    txHash: `0x${sha256Hex("magic-city-anchor").slice(0, 64)}`
+    zkappAddress: "B62qbrowserhelperregistry",
+    txHash: `0x${sha256Hex("browser-helper-anchor").slice(0, 64)}`
   },
   sequence: 7,
   previousRoot: "0"
@@ -424,15 +424,15 @@ assert.equal(verifyExecutionBundle(bundle, {
 }).valid, true);
 validateMinimal(bundle, schema("execution-bundle"));
 
-const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "mba-magic-city-"));
+const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "mba-browser-helper-"));
 const bundlePath = path.join(tempDir, "execution-bundle.json");
 fs.writeFileSync(bundlePath, JSON.stringify(bundle, null, 2));
 const mbaCli = new URL("./mba.mjs", import.meta.url).pathname;
 const cliBundle = JSON.parse(execFileSync(process.execPath, [mbaCli, "verify", "bundle", bundlePath], { encoding: "utf8" }));
 assert.equal(cliBundle.valid, true);
 
-const remote = process.env.MAGIC_CITY_CONFORMANCE_BASE_URL
-  ? await remoteSmoke(process.env.MAGIC_CITY_CONFORMANCE_BASE_URL)
+const remote = process.env.BROWSER_HELPER_CONFORMANCE_BASE_URL
+  ? await remoteSmoke(process.env.BROWSER_HELPER_CONFORMANCE_BASE_URL)
   : null;
 
 console.log(JSON.stringify({

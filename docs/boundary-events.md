@@ -74,7 +74,7 @@ holder proof includes a public JWK and signature over the holder challenge hash,
 and the verifier checks that `sha256(publicJwk)` matches the event's
 `holderKeyCommitment`.
 
-`magic-city-ed25519-pop-v1` is a compatibility proof for early browser-agent
+`browser-helper-ed25519-pop-v1` is a compatibility proof for early browser-agent
 integrations that already sign an app-specific challenge. Compatibility proofs
 must still include the canonical MBA `messageHash` so verifiers can see the
 mission/action/domain/payment context they are attached to. They are accepted

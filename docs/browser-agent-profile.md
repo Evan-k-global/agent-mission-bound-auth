@@ -38,11 +38,11 @@ digest holder proofs and compatibility holder proofs. It requires a strong
 holder proof, expiry, idempotency key, holder key commitment, receipt proof
 statement evidence, and Zeko anchor evidence for finalized receipt exports.
 
-Compatibility holder proofs such as `magic-city-ed25519-pop-v1` are for
+Compatibility holder proofs such as `browser-helper-ed25519-pop-v1` are for
 staging migrations only. They are represented in the protocol so early
 integrations can be tested honestly, but `production_strict` rejects them.
 
-## Magic City-Style Flow
+## Browser Helper Flow
 
 1. Pair or register the helper agent and bind a holder public key.
 2. Issue a mission-bound capability with narrow browser actions and a short

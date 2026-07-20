@@ -26,7 +26,7 @@
       "properties": {
         "scheme": {
           "type": "string",
-          "enum": ["digest-holder-proof-v1", "ed25519-holder-proof-v1", "magic-city-ed25519-pop-v1"]
+          "enum": ["digest-holder-proof-v1", "ed25519-holder-proof-v1", "browser-helper-ed25519-pop-v1"]
         },
         "keyThumbprint": { "type": "string" },
         "publicJwk": { "type": "object" },

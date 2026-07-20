@@ -152,7 +152,7 @@ verifyMissionBundle(bundle, jwks);
 npm test
 npm run smoke:protocol
 npm run test:conformance
-npm run test:magic-city-conformance
+npm run test:browser-helper-conformance
 npm run test:protocol-bindings
 npm run test:conformance:remote
 npm run test:oauth-sandbox
